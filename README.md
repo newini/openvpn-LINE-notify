@@ -21,7 +21,7 @@ client-disconnect /etc/openvpn/server/notify_connect_disconnect.sh
 ## 3. Download LINE notify script file
 Download script
 ```
-sudo wget -O /etc/openvpn/server/notify_connect_disconnect.sh 
+sudo wget -O /etc/openvpn/server/notify_connect_disconnect.sh https://raw.githubusercontent.com/newini/openvpn-LINE-notify/master/notify_connect_disconnect.sh
 ```
 and open to edit LINE_TOKEN
 
