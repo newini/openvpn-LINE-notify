@@ -1,4 +1,10 @@
 # openvpn-LINE-notify
+Notify when a client connect or disconnect to the OpenVPN server by LINE notify.
+
+# Pre-requirements
+```
+yum install GeoIP-devel # to get country from IP
+```
 
 # How to?
 
