@@ -1,4 +1,5 @@
 #!/bin/bash
+#notify_connect_disconnect.sh
 # Description: LINE Notify when clien connect/disconnect OpenVPN
 # Author: newini
 # Date: April 2020
@@ -7,6 +8,10 @@
 # Must change this
 LINE_TOKEN=jkasdo1uijasdklakfjjlwi123113
 
+#======================================
+#               functions
+#======================================
+# Format byte
 function unitify_bytes {
     bytes=$1
     if [ "$bytes" -gt "1073741824" ]; then
@@ -20,6 +25,7 @@ function unitify_bytes {
     fi
 }
 
+# Format time
 function unitify_seconds {
     local SS=$1
 
@@ -49,6 +55,7 @@ function unitify_seconds {
     echo "$time_string"
 }
 
+# Decide connect or disconnect
 if [ "$script_type" == "client-connect" ]; then
     action="connected to"
 else
@@ -59,6 +66,11 @@ Received $(unitify_bytes $bytes_received)
 Sent $(unitify_bytes $bytes_sent)"
 fi
 
+# Find country
+# TODO: find city
+country=`geoiplookup ${untrusted_ip} | cut -d ',' -f 2`
+
+# Create notify message
 message="~
 '$common_name' $action $HOSTNAME
 Connection Start: ${time_ascii}
@@ -66,4 +78,5 @@ Client WAN IP: ${untrusted_ip}
 Client LAN IP: ${ifconfig_pool_remote_ip}
 ${action_specific_info}"
 
+# Send notify message
 /bin/curl -X POST -H "Authorization: Bearer ${LINE_TOKEN}" -F "message=${message}" https://notify-api.line.me/api/notify
