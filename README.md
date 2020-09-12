@@ -2,8 +2,13 @@
 Notify when a client connect or disconnect to the OpenVPN server by LINE notify.
 
 # Pre-requirements
+- For CentOS system
 ```
 yum install GeoIP-devel # to get country from IP
+```
+- For Ubuntu system
+```
+sudo apt-get install geoip-bin
 ```
 
 # How to?
@@ -14,9 +19,7 @@ https://notify-bot.line.me/my/
 get a 'LINE token'
 
 ## 2. Change OpenVPN config
-open and edit /etc/openvpn/server.conf
-
-add below lines.
+Open and edit configuration file on `/etc/openvpn/server.conf` or ``/etc/openvpn/server/server.conf``, and add below lines.
 ```
 # Send notify when clien connect/disconnect
 script-security 2
